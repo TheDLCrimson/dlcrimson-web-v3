@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${ethno.variable} ${calSans.variable} ${inter.className} antialiased`}
+      className={`${ethno.variable} ${calSans.variable} ${inter.className} antialiased dark`}
     >
       <head></head>
       <body
