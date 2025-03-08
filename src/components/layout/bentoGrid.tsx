@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import React from "react";
-import { BentoGrid, BentoGridItem } from "../ui/bento-grid";
+import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import {
   IconBoxAlignRightFilled,
   IconClipboardCopy,
@@ -14,21 +14,21 @@ import Image from "next/image";
 
 export function BentoGridProjects() {
   return (
-    <BentoGrid className="max-w-4xl mx-auto md:auto-rows-[20rem]">
+    <BentoGrid className="max-w-7xl mx-auto">
       {items.map((item, i) => (
         <BentoGridItem
           key={i}
           title={item.title}
           description={item.description}
           header={item.header}
-          className={cn("[&>p:text-lg]", item.className)}
           icon={item.icon}
+          className={item.className}
+          variant={item.variant}
         />
       ))}
     </BentoGrid>
   );
 }
-
 const SkeletonOne = () => {
   const variants = {
     initial: {
@@ -74,13 +74,6 @@ const SkeletonOne = () => {
       >
         <div className="w-full bg-gray-100 h-4 rounded-full dark:bg-neutral-900" />
         <div className="h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 flex-shrink-0" />
-      </motion.div>
-      <motion.div
-        variants={variants}
-        className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2 items-center space-x-2 bg-white dark:bg-black"
-      >
-        <div className="h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 flex-shrink-0" />
-        <div className="w-full bg-gray-100 h-4 rounded-full dark:bg-neutral-900" />
       </motion.div>
     </motion.div>
   );
@@ -294,61 +287,124 @@ const SkeletonFive = () => {
     </motion.div>
   );
 };
+
 const items = [
   {
-    title: "AI Content Generation",
+    title: "AI-Powered Content Creation",
     description: (
       <span className="text-sm">
-        Experience the power of AI in generating unique content.
+        Leverage the power of artificial intelligence to generate original content that meets your needs, from articles to blog posts and beyond.
       </span>
     ),
     header: <SkeletonOne />,
-    className: "md:col-span-1",
+    className: "col-span-4 row-span-4",
     icon: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
   },
   {
-    title: "Automated Proofreading",
+    title: "AI Content Optimization",
     description: (
       <span className="text-sm">
-        Let AI handle the proofreading of your documents.
+        Enhance and refine your content with AI, providing suggestions and improvements to boost readability and engagement.
+      </span>
+    ),
+    header: <SkeletonOne />,
+    className: "col-span-5 row-span-3",
+    icon: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
+  },
+  {
+    title: "AI Writing Assistant",
+    description: (
+      <span className="text-sm">
+        Empower your writing process with AI that assists in drafting, editing, and polishing your content to perfection.
+      </span>
+    ),
+    header: <SkeletonOne />,
+    className: "col-span-3 row-span-3",
+    icon: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
+  },
+  {
+    title: "AI-Driven Content Enhancement",
+    description: (
+      <span className="text-sm">
+        Elevate the quality of your written content using AI tools that help with grammar, clarity, and style improvements.
+      </span>
+    ),
+    header: <SkeletonOne />,
+    className: "col-span-4 row-span-3",
+    icon: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
+  },
+  {
+    // header: (
+    //   <figure>
+    //     <embed src="https://wakatime.com/share/@1d378899-1431-438f-8cfb-c1edf02ecc97/4b658a53-aaca-487d-8185-664015717f8a.svg"></embed>
+    //   </figure>
+    // ),
+    className: "col-span-8 row-span-4",
+  },
+  {
+    title: "Automated Document Proofreading",
+    description: (
+      <span className="text-sm">
+        Let AI take care of proofreading by identifying and correcting grammar, punctuation, and style issues in your documents automatically.
       </span>
     ),
     header: <SkeletonTwo />,
-    className: "md:col-span-1",
+    className: "col-span-4 row-span-3",
     icon: <IconFileBroken className="h-4 w-4 text-neutral-500" />,
   },
   {
-    title: "Contextual Suggestions",
+    title: "Contextual Writing Suggestions",
     description: (
       <span className="text-sm">
-        Get AI-powered suggestions based on your writing context.
+        Receive tailored, context-specific writing suggestions from AI that improve your content based on the intended tone and message.
       </span>
     ),
     header: <SkeletonThree />,
-    className: "md:col-span-1",
+    className: "col-span-4 row-span-3",
     icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
   },
   {
-    title: "Sentiment Analysis",
+    title: "AI-Powered Text Summarization",
     description: (
       <span className="text-sm">
-        Understand the sentiment of your text with AI analysis.
-      </span>
-    ),
-    header: <SkeletonFour />,
-    className: "md:col-span-2",
-    icon: <IconTableColumn className="h-4 w-4 text-neutral-500" />,
-  },
-
-  {
-    title: "Text Summarization",
-    description: (
-      <span className="text-sm">
-        Summarize your lengthy documents with AI technology.
+        Transform lengthy documents into concise summaries, enabling you to quickly digest key points with the help of AI.
       </span>
     ),
     header: <SkeletonFive />,
-    className: "md:col-span-1",
+    className: "col-span-4 row-span-4",
     icon: <IconBoxAlignRightFilled className="h-4 w-4 text-neutral-500" />,
+  },
+  {
+    title: "AI Sentiment Analysis",
+    description: (
+      <span className="text-sm">
+        Analyze the sentiment of any given text using AI to understand the emotional tone, whether it's positive, negative, or neutral.
+      </span>
+    ),
+    header: <SkeletonFour />,
+    className: "col-span-4 row-span-3",
+    icon: <IconTableColumn className="h-4 w-4 text-neutral-500" />,
+  },
+  {
+    title: "Context-Aware Content Suggestions",
+    description: (
+      <span className="text-sm">
+        Receive insightful, context-driven suggestions from AI to enhance your writing, making it more relevant and impactful for your audience.
+      </span>
+    ),
+    header: <SkeletonThree />,
+    className: "col-span-3 row-span-3",
+    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
+  },
+  {
+    title: "Contextual Writing Assistant",
+    description: (
+      <span className="text-sm">
+        AI-powered contextual suggestions help refine your content and ensure it resonates with your target audience, improving clarity and engagement.
+      </span>
+    ),
+    header: <SkeletonThree />,
+    className: "col-span-5 row-span-3",
+    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
   },
 ];

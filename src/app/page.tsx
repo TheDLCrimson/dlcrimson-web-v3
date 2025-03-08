@@ -25,8 +25,6 @@ export default function Home() {
           : "bg-gradient-to-tl from-white via-[#DEE4EA] to-white"
       }`}
     >
-      {/* <NavigationMenu darkMode={darkMode} /> */}
-
       {/* Updated glow line with custom-fade-left */}
       <div className="hidden w-screen h-px animate-glow md:block animate-custom-fade-left bg-gradient-to-r from-[#a30000]/0 via-[#a30000]/80 to-[#a30000]/20" />
 
@@ -55,7 +53,7 @@ export default function Home() {
         </h2>
         <h2
           onClick={toggleBackground}
-          className="cursor-pointer text-sm text-red-800 font-calsans transition-all duration-1000 animate-pulse"
+          className="cursor-pointer text-sm text-red-800 font-calsans transition-all duration-2000 animate-pulse"
         >
           A fallen gifted
         </h2>

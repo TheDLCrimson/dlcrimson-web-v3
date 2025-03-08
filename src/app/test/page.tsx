@@ -1,141 +1,330 @@
+"use client";
 import { cn } from "@/lib/utils";
 import React from "react";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import {
-  IconArrowWaveRightUp,
   IconBoxAlignRightFilled,
-  IconBoxAlignTopLeft,
   IconClipboardCopy,
   IconFileBroken,
   IconSignature,
   IconTableColumn,
 } from "@tabler/icons-react";
+import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function TestPage() {
   return (
-    <BentoGrid className="max-w-5xl mx-auto">
+    <BentoGrid className="max-w-7xl mx-auto">
       {items.map((item, i) => (
         <BentoGridItem
           key={i}
           title={item.title}
           description={item.description}
           header={item.header}
+          className={cn("[&>p:text-lg]", item.className)}
           icon={item.icon}
-          className={item.className}
+          variant={item.variant}
         />
       ))}
     </BentoGrid>
   );
 }
-const Skeleton = () => (
-  <div className="flex flex-1 w-full h-full rounded-xl bg-gradient-to-br from-neutral-200 dark:from-neutral-900 dark:to-neutral-800 to-neutral-100"></div>
-);
+
+const SkeletonOne = () => {
+  const variants = {
+    initial: {
+      x: 0,
+    },
+    animate: {
+      x: 10,
+      rotate: 5,
+      transition: {
+        duration: 0.2,
+      },
+    },
+  };
+  const variantsSecond = {
+    initial: {
+      x: 0,
+    },
+    animate: {
+      x: -10,
+      rotate: -5,
+      transition: {
+        duration: 0.2,
+      },
+    },
+  };
+
+  return (
+    <motion.div
+      initial="initial"
+      whileHover="animate"
+      className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-col space-y-2"
+    >
+      <motion.div
+        variants={variants}
+        className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2  items-center space-x-2 bg-white dark:bg-black"
+      >
+        <div className="h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 flex-shrink-0" />
+        <div className="w-full bg-gray-100 h-4 rounded-full dark:bg-neutral-900" />
+      </motion.div>
+      <motion.div
+        variants={variantsSecond}
+        className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2 items-center space-x-2 w-3/4 ml-auto bg-white dark:bg-black"
+      >
+        <div className="w-full bg-gray-100 h-4 rounded-full dark:bg-neutral-900" />
+        <div className="h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 flex-shrink-0" />
+      </motion.div>
+    </motion.div>
+  );
+};
+const SkeletonTwo = () => {
+  const variants = {
+    initial: {
+      width: 0,
+    },
+    animate: {
+      width: "100%",
+      transition: {
+        duration: 0.2,
+      },
+    },
+    hover: {
+      width: ["0%", "100%"],
+      transition: {
+        duration: 2,
+      },
+    },
+  };
+  const arr = new Array(6).fill(0);
+  return (
+    <motion.div
+      initial="initial"
+      animate="animate"
+      whileHover="hover"
+      className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-col space-y-2"
+    >
+      {arr.map((_, i) => (
+        <motion.div
+          key={"skelenton-two" + i}
+          variants={variants}
+          style={{
+            maxWidth: Math.random() * (100 - 40) + 40 + "%",
+          }}
+          className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2  items-center space-x-2 bg-neutral-100 dark:bg-black w-full h-4"
+        ></motion.div>
+      ))}
+    </motion.div>
+  );
+};
+const SkeletonThree = () => {
+  const variants = {
+    initial: {
+      backgroundPosition: "0 50%",
+    },
+    animate: {
+      backgroundPosition: ["0, 50%", "100% 50%", "0 50%"],
+    },
+  };
+  return (
+    <motion.div
+      initial="initial"
+      animate="animate"
+      variants={variants}
+      transition={{
+        duration: 5,
+        repeat: Infinity,
+        repeatType: "reverse",
+      }}
+      className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] rounded-lg bg-dot-black/[0.2] flex-col space-y-2"
+      style={{
+        background:
+          "linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)",
+        backgroundSize: "400% 400%",
+      }}
+    >
+      <motion.div className="h-full w-full rounded-lg"></motion.div>
+    </motion.div>
+  );
+};
+const SkeletonFour = () => {
+  const first = {
+    initial: {
+      x: 20,
+      rotate: -5,
+    },
+    hover: {
+      x: 0,
+      rotate: 0,
+    },
+  };
+  const second = {
+    initial: {
+      x: -20,
+      rotate: 5,
+    },
+    hover: {
+      x: 0,
+      rotate: 0,
+    },
+  };
+  return (
+    <motion.div
+      initial="initial"
+      animate="animate"
+      whileHover="hover"
+      className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-row space-x-2"
+    >
+      <motion.div
+        variants={first}
+        className="h-full w-1/3 rounded-2xl bg-white p-4 dark:bg-black dark:border-white/[0.1] border border-neutral-200 flex flex-col items-center justify-center"
+      >
+        <Image
+          src="https://pbs.twimg.com/profile_images/1417752099488636931/cs2R59eW_400x400.jpg"
+          alt="avatar"
+          height="100"
+          width="100"
+          className="rounded-full h-10 w-10"
+        />
+        <p className="sm:text-sm text-xs text-center font-semibold text-neutral-500 mt-4">
+          Just code in Vanilla Javascript
+        </p>
+        <p className="border border-red-500 bg-red-100 dark:bg-red-900/20 text-red-600 text-xs rounded-full px-2 py-0.5 mt-4">
+          Delusional
+        </p>
+      </motion.div>
+      <motion.div className="h-full relative z-20 w-1/3 rounded-2xl bg-white p-4 dark:bg-black dark:border-white/[0.1] border border-neutral-200 flex flex-col items-center justify-center">
+        <Image
+          src="https://pbs.twimg.com/profile_images/1417752099488636931/cs2R59eW_400x400.jpg"
+          alt="avatar"
+          height="100"
+          width="100"
+          className="rounded-full h-10 w-10"
+        />
+        <p className="sm:text-sm text-xs text-center font-semibold text-neutral-500 mt-4">
+          Tailwind CSS is cool, you know
+        </p>
+        <p className="border border-green-500 bg-green-100 dark:bg-green-900/20 text-green-600 text-xs rounded-full px-2 py-0.5 mt-4">
+          Sensible
+        </p>
+      </motion.div>
+      <motion.div
+        variants={second}
+        className="h-full w-1/3 rounded-2xl bg-white p-4 dark:bg-black dark:border-white/[0.1] border border-neutral-200 flex flex-col items-center justify-center"
+      >
+        <Image
+          src="https://pbs.twimg.com/profile_images/1417752099488636931/cs2R59eW_400x400.jpg"
+          alt="avatar"
+          height="100"
+          width="100"
+          className="rounded-full h-10 w-10"
+        />
+        <p className="sm:text-sm text-xs text-center font-semibold text-neutral-500 mt-4">
+          I love angular, RSC, and Redux.
+        </p>
+        <p className="border border-orange-500 bg-orange-100 dark:bg-orange-900/20 text-orange-600 text-xs rounded-full px-2 py-0.5 mt-4">
+          Helpless
+        </p>
+      </motion.div>
+    </motion.div>
+  );
+};
+const SkeletonFive = () => {
+  const variants = {
+    initial: {
+      x: 0,
+    },
+    animate: {
+      x: 10,
+      rotate: 5,
+      transition: {
+        duration: 0.2,
+      },
+    },
+  };
+  const variantsSecond = {
+    initial: {
+      x: 0,
+    },
+    animate: {
+      x: -10,
+      rotate: -5,
+      transition: {
+        duration: 0.2,
+      },
+    },
+  };
+
+  return (
+    <motion.div
+      initial="initial"
+      whileHover="animate"
+      className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-col space-y-2"
+    >
+      <motion.div
+        variants={variants}
+        className="flex flex-row rounded-2xl border border-neutral-100 dark:border-white/[0.2] p-2  items-start space-x-2 bg-white dark:bg-black"
+      >
+        <Image
+          src="https://pbs.twimg.com/profile_images/1417752099488636931/cs2R59eW_400x400.jpg"
+          alt="avatar"
+          height="100"
+          width="100"
+          className="rounded-full h-10 w-10"
+        />
+        <p className="text-xs text-neutral-500">
+          There are a lot of cool framerworks out there like React, Angular,
+          Vue, Svelte that can make your life ....
+        </p>
+      </motion.div>
+      <motion.div
+        variants={variantsSecond}
+        className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2 items-center justify-end space-x-2 w-3/4 ml-auto bg-white dark:bg-black"
+      >
+        <p className="text-xs text-neutral-500">Use PHP.</p>
+        <div className="h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 flex-shrink-0" />
+      </motion.div>
+    </motion.div>
+  );
+};
+
 const items = [
-    {
-      title: "The Dawn of Innovation",
-      description: "Built 'ITrash Remover 1000', a robot for VSC 2020, equipped with DC motors, circuits, and Raspberry Pi.",
-      header: <Skeleton />,
-      icon: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
-      className: "col-span-4 row-span-5",
-    },
-    {
-      title: "The Digital Revolution", // Title only
-      description: "",
-      header: null,
-      icon: null,
-      className: "col-span-6 row-span-2",
-    },
-    {
-      title: "The Art of Design",
-      description: "Created a portfolio website showcasing projects using ReactJS and TypeScript.",
-      header: <Skeleton />,
-      icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
-      className: "col-span-6 row-span-5",
-    },
-    {
-      title: "Empowering Education", // Title only
-      description: "",
-      header: null,
-      icon: null,
-      className: "col-span-6 row-span-2",
-    },
-    {
-      title: "The Power of Communication",
-      description: "Founded 'CodiFriend Club', teaching computer science to underprivileged students in rural areas.",
-      header: <Skeleton />,
-      icon: <IconTableColumn className="h-4 w-4 text-neutral-500" />,
-      className: "col-span-6 row-span-4",
-    },
-    {
-      title: "The Pursuit of Knowledge", // Title only
-      description: "",
-      header: null,
-      icon: null,
-      className: "col-span-3 row-span-3",
-    },
-    {
-      title: "The Joy of Creation",
-      description: "Invented the 'Ping-Pong Ball Gun 1000', a cost-efficient device for solo table tennis practice.",
-      header: <Skeleton />,
-      icon: <IconBoxAlignTopLeft className="h-4 w-4 text-neutral-500" />,
-      className: "col-span-5 row-span-5",
-    },
-    {
-      title: "The Spirit of Adventure",
-      description: "Organized swimming events to raise 300M VND for flood and landslide victims in Central Vietnam.",
-      header: <Skeleton />,
-      icon: <IconBoxAlignRightFilled className="h-4 w-4 text-neutral-500" />,
-      className: "col-span-4 row-span-2",
-    },
-    {
-      title: "Champion of E-Sports", // Title only
-      description: "",
-      header: null,
-      icon: null,
-      className: "col-span-3 row-span-2",
-    },
-    {
-      title: "Hackathon Success",
-      description: "Placed in the Top 6 at the VinUniversity Hackathon, showcasing innovative software solutions.",
-      header: <Skeleton />,
-      icon: <IconBoxAlignTopLeft className="h-4 w-4 text-neutral-500" />,
-      className: "col-span-5 row-span-2",
-    },
-    {
-      title: "Lighting Up Ideas",
-      description: "Recycled broken TVs to create functional and aesthetic LED light panels.",
-      header: <Skeleton />,
-      icon: <IconArrowWaveRightUp className="h-4 w-4 text-neutral-500" />,
-      className: "col-span-4 row-span-2",
-    },
-    {
-      title: "Bringing STEAM to Life",
-      description: "Founded Phan Dinh Phung STEAM Club, teaching mechanical tools and coding to students.",
-      header: <Skeleton />,
-      icon: <IconBoxAlignRightFilled className="h-4 w-4 text-neutral-500" />,
-      className: "col-span-4 row-span-3",
-    },
-    {
-      title: "The Future of AI", // Title only
-      description: "",
-      header: null,
-      icon: null,
-      className: "col-span-3 row-span-1",
-    },
-    {
-      title: "Fostering AI Growth",
-      description: "Mentored Coding School Team members, teaching algorithms and competitive programming.",
-      header: <Skeleton />,
-      icon: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
-      className: "col-span-3 row-span-2",
-    },
-    {
-      title: "Excellence in Programming", // Title only
-      description: "",
-      header: null,
-      icon: null,
-      className: "col-span-2 row-span-1",
-    },
-  ];
-  
-  
+  {
+    title: "Automated Document Proofreading",
+    description: (
+      <span className="text-sm">
+        Let AI take care of proofreading by identifying and correcting grammar,
+        punctuation, and style issues in your documents automatically.
+      </span>
+    ),
+    header: <SkeletonFive />,
+    className: "col-span-5 row-span-4",
+    icon: <IconFileBroken className="h-4 w-4 text-neutral-500" />,
+    variant: "minimal",
+  },
+  {
+    title: "AI Content Generation",
+    description: (
+      <span className="text-sm">
+        Experience the power of AI in generating unique content.
+      </span>
+    ),
+    header: <SkeletonOne />,
+    className: "col-span-4 row-span-7",
+    icon: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
+    variant: "normal",
+  },
+  {
+    title: "AI Content Generation",
+    description: (
+      <span className="text-sm">
+        Experience the power of AI in generating unique content.
+      </span>
+    ),
+    header: <SkeletonOne />,
+    className: "col-span-7 row-span-4",
+    icon: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
+    variant: "normal",
+  },
+];

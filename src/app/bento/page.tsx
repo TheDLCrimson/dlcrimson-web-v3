@@ -1,15 +1,15 @@
 "use client";
 
+import { BentoGridProjects } from "@/components/layout/bentoGrid";
 import React from "react";
-import FounderMatching from "@/components/projects/FounderMatching.mdx";
+import { useState, useEffect } from "react";
 
-
-export default function Projects() {
+export default function Home() {
   return (
     <div
       className={`flex flex-col items-center justify-center w-screen h-screen overflow-hidden `}
     >
-      <FounderMatching />
+        <BentoGridProjects />
     </div>
   );
 }

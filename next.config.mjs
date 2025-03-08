@@ -1,10 +1,19 @@
+import createMDX from '@next/mdx'
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    reactStrictMode: true,
-    images: {
-      domains: ['pbs.twimg.com'], // Add external domain for next/image
-    },
-  };
+  // Configure `pageExtensions` to include markdown and MDX files
+  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
+  // Optionally, add any other Next.js config below
+  reactStrictMode: true,
+  images: {
+    domains: ['pbs.twimg.com'], // Add external domain for next/image
+  },
+};
+
+const withMDX = createMDX({
+  // Add markdown plugins here, as desired
+})
   
-  export default nextConfig;
-  
+// Merge MDX config with Next.js config
+export default withMDX(nextConfig)
