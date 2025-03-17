@@ -1,0 +1,30 @@
+---
+title: "Security Testing for LLMs Against LRL Jailbreak Attacks"
+description: "Evaluating Gemini LLMs' safety in low-resource languages (LRLs)."
+repository: "https://github.com/TheDLCrimson/text-classification"
+---
+
+## Overview
+
+Ensuring the safety of **Large Language Models (LLMs)** across diverse languages is crucial. This project evaluates the security of **Google’s Gemini LLMs (Flash, Flash8B, Pro)** against **jailbreak attacks**, specifically in **low-resource languages (LRLs)** where safety mechanisms may be weaker.
+
+By systematically testing these models, the project identifies vulnerabilities and provides **actionable insights** to enhance **multilingual security and inclusivity**.
+
+**This project is relevant for:**  
+- **AI Researchers** studying adversarial robustness in LLMs.  
+- **Developers** working on safer multilingual AI systems.  
+- **Policy Makers** concerned with AI safety in diverse linguistic environments.  
+
+## Key Features
+
+- **Jailbreak Testing:** Evaluates the effectiveness of safety mechanisms in LRLs.  
+- **Adversarial Benchmarking:** Uses **AdvBench** and custom prompts for security assessment.  
+- **ML-Based Classification:** Categorizes model responses into `BYPASS`, `REJECT`, and `UNCLEAR`.  
+
+## Tech Stack
+
+- **Testing Models:** Gemini Flash, Gemini Flash8B  
+- **Classification:** TF-IDF, Logistic Regression, Decision Trees  
+- **Dataset:** [AdvBench](https://huggingface.co/datasets/walledai/AdvBench), custom translations  
+- **Visualization:** Python (Matplotlib, Pandas)  
+
